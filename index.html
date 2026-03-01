@@ -8,415 +8,274 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Animate.css -->
+    <!-- Animated CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-
         :root {
             --primary-color: #2c3e50;
             --secondary-color: #e67e22;
-            --accent-color: #f39c12;
             --success-color: #27ae60;
             --danger-color: #e74c3c;
             --light-bg: #f8f9fa;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
-            overflow-x: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color) !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #d35400;
+            border-color: #d35400;
+        }
+        
+        /* Animation pour attirer l'attention */
+        .moving-text {
+            background: linear-gradient(45deg, #e67e22, #f39c12, #e67e22);
+            background-size: 200% 200%;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(230, 126, 34, 0.3);
+            animation: gradientMove 3s ease infinite, pulse 2s ease-in-out infinite;
         }
 
-        /* Animations personnalisées */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.02); }
             100% { transform: scale(1); }
         }
 
-        @keyframes shine {
-            0% { left: -100%; }
-            20% { left: 100%; }
-            100% { left: 100%; }
+        /* Animation pour les produits */
+        .product-card {
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            animation: fadeInUp 0.5s ease-out;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .product-image {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px 8px 0 0;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+        
+        .cart-badge {
+            position: relative;
+            top: -10px;
+            right: 5px;
+            font-size: 0.7rem;
+            animation: bounce 1s ease infinite;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        .admin-section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(230, 126, 34, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(230, 126, 34, 0.4); }
+            100% { box-shadow: 0 0 5px rgba(230, 126, 34, 0.2); }
+        }
+        
+        .status-pending { background-color: #fff3cd; color: #856404; }
+        .status-paid { background-color: #d4edda; color: #155724; }
+        .status-delivered { background-color: #cce5ff; color: #004085; }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+            transition: transform 0.3s;
+        }
+
+        .contact-info i:hover {
+            transform: rotate(360deg) scale(1.2);
+        }
+        
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: shake 3s ease-in-out infinite;
         }
 
         @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+            20%, 40%, 60%, 80% { transform: translateX(2px); }
+        }
+        
+        .whatsapp-btn:hover {
+            background-color: #128C7E;
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .product-image {
+                height: 150px;
+            }
+            .container {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+            .moving-text {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+        }
+        
+        .order-receipt {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .nav-tabs .nav-link.active {
+            font-weight: bold;
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+        }
+        
+        .table-responsive {
+            overflow-x: auto;
+        }
+        
+        .clickable {
+            cursor: pointer;
+        }
+        
+        .company-info {
+            background: linear-gradient(135deg, var(--primary-color), #34495e);
+            color: white;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            animation: slideInDown 0.8s ease-out;
         }
 
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px var(--secondary-color); }
-            50% { box-shadow: 0 0 20px var(--secondary-color), 0 0 30px var(--accent-color); }
-            100% { box-shadow: 0 0 5px var(--secondary-color); }
-        }
-
-        @keyframes slideIn {
+        @keyframes slideInDown {
             from {
-                transform: translateX(-100%);
+                transform: translateY(-50px);
                 opacity: 0;
             }
             to {
-                transform: translateX(0);
+                transform: translateY(0);
                 opacity: 1;
             }
         }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Texte animé */
-        .animated-text {
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .pulse-text {
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .shake-text:hover {
-            animation: shake 0.5s ease-in-out;
-        }
-
-        .glow-text {
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        .typing-effect {
-            overflow: hidden;
-            border-right: 3px solid var(--secondary-color);
-            white-space: nowrap;
-            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--secondary-color); }
-        }
-
-        /* Bannières animées */
-        .floating-banner {
-            animation: float 6s ease-in-out infinite;
-            background: var(--gradient-1);
-            color: white;
-            padding: 15px;
-            border-radius: 50px;
-            margin-bottom: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .floating-banner::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shine 3s infinite;
-        }
-
-        .rotating-text {
-            display: inline-block;
-            animation: rotate 10s linear infinite;
-        }
-
-        .bouncing-text span {
-            display: inline-block;
-            animation: bounce 1s ease infinite;
-        }
-
-        .bouncing-text span:nth-child(2) { animation-delay: 0.1s; }
-        .bouncing-text span:nth-child(3) { animation-delay: 0.2s; }
-        .bouncing-text span:nth-child(4) { animation-delay: 0.3s; }
-        .bouncing-text span:nth-child(5) { animation-delay: 0.4s; }
-        .bouncing-text span:nth-child(6) { animation-delay: 0.5s; }
-        .bouncing-text span:nth-child(7) { animation-delay: 0.6s; }
-        .bouncing-text span:nth-child(8) { animation-delay: 0.7s; }
-
-        /* Cartes produits animées */
-        .product-card {
-            transition: all 0.3s ease;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            background: white;
-            position: relative;
-        }
-
-        .product-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            animation: glow 2s ease-in-out infinite;
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .product-card:hover::before {
-            left: 100%;
-        }
-
-        .product-image {
-            height: 200px;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .product-card:hover .product-image {
-            transform: scale(1.1);
-        }
-
-        /* Boutons animés */
-        .btn-animated {
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-            z-index: 1;
-        }
-
-        .btn-animated::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s;
-            z-index: -1;
-        }
-
-        .btn-animated:hover::before {
-            left: 100%;
-        }
-
-        .btn-animated:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-
-        .btn-pulse {
-            animation: pulse 2s infinite;
-        }
-
-        .btn-shake:hover {
-            animation: shake 0.5s;
-        }
-
-        /* Badges animés */
-        .badge-animated {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .badge-animated::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
-            transform: rotate(45deg);
-            animation: shine 2s infinite;
-        }
-
-        /* Company info animé */
-        .company-info {
-            background: var(--gradient-3);
-            color: white;
-            padding: 40px 0;
-            margin-bottom: 30px;
-            border-radius: 0 0 50px 50px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .company-info::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
-            transform: rotate(45deg);
-            animation: shine 4s infinite;
-        }
-
-        .company-info h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        /* Icônes animées */
-        .service-icon {
-            font-size: 3rem;
-            color: var(--secondary-color);
-            transition: all 0.3s;
-        }
-
-        .service-icon:hover {
-            transform: rotate(360deg) scale(1.2);
-            color: var(--accent-color);
-        }
-
-        /* Prix clignotant */
-        .price-blink {
-            animation: pulse 1s ease-in-out infinite;
+        /* Texte clignotant pour les promotions */
+        .blink-text {
+            animation: blinker 1.5s linear infinite;
             color: var(--secondary-color);
             font-weight: bold;
-            font-size: 1.2rem;
         }
 
-        /* Notification animée */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transform: translateX(400px);
-            transition: transform 0.3s;
-            z-index: 1000;
+        @keyframes blinker {
+            50% { opacity: 0.5; }
         }
 
-        .notification.show {
-            transform: translateX(0);
-            animation: slideIn 0.5s ease-out;
-        }
-
-        /* Compteur animé */
-        .counter {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--secondary-color);
-            animation: pulse 2s infinite;
-        }
-
-        /* Éléments de navigation animés */
-        .nav-link {
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .nav-link::after {
-            content: '';
+        /* Animation pour les nouveaux produits */
+        .new-product-badge {
             position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--secondary-color);
-            transition: all 0.3s;
-            transform: translateX(-50%);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-link:hover {
-            color: var(--secondary-color) !important;
-            transform: translateY(-2px);
-        }
-
-        /* Panier animé */
-        .cart-badge {
-            animation: pulse 2s infinite;
-        }
-
-        /* Modal animé */
-        .modal-content {
-            animation: slideIn 0.5s;
-        }
-
-        /* Footer animé */
-        .footer {
-            background: var(--primary-color);
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(45deg, #e67e22, #f39c12);
             color: white;
-            padding: 30px 0;
-            margin-top: 50px;
-            position: relative;
-            overflow: hidden;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            animation: swing 2s ease-in-out infinite;
         }
 
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            animation: shine 5s infinite;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .company-info h1 {
-                font-size: 2rem;
-            }
-            
-            .typing-effect {
-                font-size: 1rem;
-                white-space: normal;
-            }
+        @keyframes swing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
         }
     </style>
 </head>
 <body>
-    <!-- Notification animée -->
-    <div id="notification" class="notification">
-        <i class="fas fa-check-circle text-success me-2"></i>
-        <span id="notificationMessage"></span>
-    </div>
-
-    <!-- Navigation avec effets -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light animate__animated animate__fadeInDown">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand animated-text" href="#">
-                <i class="fas fa-store rotating-text"></i> Habsat_Digital
+            <a class="navbar-brand" href="#" onclick="showSection('home')">
+                <i class="fas fa-store"></i> Habsat_Digital
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -424,32 +283,24 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('home')">
-                            <i class="fas fa-home"></i> Accueil
-                        </a>
+                        <a class="nav-link" href="#" onclick="showSection('home')">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('products')">
-                            <i class="fas fa-box"></i> Produits
-                        </a>
+                        <a class="nav-link" href="#" onclick="showSection('products')">Produits</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('track')">
-                            <i class="fas fa-truck"></i> Suivre commande
-                        </a>
+                        <a class="nav-link" href="#" onclick="showSection('track')">Suivre commande</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="showSection('contact')">
-                            <i class="fas fa-envelope"></i> Contact
-                        </a>
+                        <a class="nav-link" href="#" onclick="showSection('contact')">Contact</a>
                     </li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn btn-outline-primary position-relative me-2 btn-animated" onclick="showCart()">
+                    <button class="btn btn-outline-primary position-relative me-2" onclick="showCart()">
                         <i class="fas fa-shopping-cart"></i>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge" id="cartCount">0</span>
                     </button>
-                    <button class="btn btn-outline-secondary btn-animated" onclick="showAdminLogin()">
+                    <button class="btn btn-outline-secondary" onclick="showAdminLogin()">
                         <i class="fas fa-user-shield"></i>
                     </button>
                 </div>
@@ -457,87 +308,65 @@
         </div>
     </nav>
 
-    <!-- Bannière flottante promotionnelle -->
-    <div class="container mt-3">
-        <div class="floating-banner text-center">
-            <div class="bouncing-text">
-                <span>🔥</span>
-                <span>P</span>
-                <span>R</span>
-                <span>O</span>
-                <span>M</span>
-                <span>O</span>
-                <span>🔥</span>
-            </div>
-            <h3 class="mb-0 pulse-text">-10% sur votre première commande !</h3>
-            <p class="mb-0"> <strong>HABSAT DIGITAL GABASSA</strong></p>
+    <!-- Texte animé pour attirer l'attention -->
+    <div class="container">
+        <div class="moving-text animate__animated animate__pulse">
+            <i class="fas fa-fire me-2"></i>
+            🔥 NOUVEAUTÉS -15% SUR VOTRE PREMIERE COMMANDE - LIVRAISON GRATUITE 🔥
+            <i class="fas fa-fire ms-2"></i>
         </div>
     </div>
 
     <!-- Main Content -->
     <div class="container mt-4">
-        <!-- Company Info Section avec animations -->
-        <div class="company-info text-center rounded-3 p-4 mb-4 animate__animated animate__zoomIn">
-            <h1 class="mb-3"><i class="fas fa-store-alt me-2 rotating-text"></i>Habsat_Digital</h1>
-            <p class="lead typing-effect mx-auto" style="display: inline-block;">Votre partenaire de confiance pour tous vos achats</p>
-            <div class="mt-3">
-                <p class="shake-text"><i class="fas fa-map-marker-alt me-2"></i>Gabassa Wanzamawa, Niger | <i class="fas fa-phone me-2"></i>+227 98136422</p>
-            </div>
-            <div class="row mt-4">
-                <div class="col-4">
-                    <div class="counter" id="happyClients">1500+</div>
-                    <small>Clients satisfaits</small>
-                </div>
-                <div class="col-4">
-                    <div class="counter" id="productsCount">50+</div>
-                    <small>Produits</small>
-                </div>
-                <div class="col-4">
-                    <div class="counter" id="deliveryCount">1000+</div>
-                    <small>Livraisons</small>
-                </div>
+        <!-- Company Info Section (toujours visible) -->
+        <div class="company-info text-center rounded-3 p-4 mb-4">
+            <h1 class="animate__animated animate__fadeIn"><i class="fas fa-store-alt me-2"></i>Habsat_Digital</h1>
+            <p class="lead animate__animated animate__fadeIn animate__delay-1s">Votre partenaire de confiance pour tous vos achats</p>
+            <div class="animate__animated animate__fadeIn animate__delay-2s">
+                <p><i class="fas fa-map-marker-alt me-2"></i>wanzamawa,Gabassa Niger | <i class="fas fa-phone me-2"></i>+227 98136422</p>
             </div>
         </div>
 
         <!-- Sections dynamiques -->
-        <div id="homeSection" class="section animate__animated animate__fadeIn">
+        <div id="homeSection" class="section">
             <div class="row">
                 <div class="col-md-8">
-                    <h2 class="animated-text">Bienvenue chez Habsat_Digital de Nouhou</h2>
-                    <p class="lead">Découvrez notre large gamme de produits de qualité à prix abordables.</p>
+                    <h2 class="animate__animated animate__fadeInLeft">Bienvenue chez Habsat_Digital</h2>
+                    <p class="animate__animated animate__fadeInLeft animate__delay-1s">Découvrez notre large gamme de produits de qualité à prix abordables.</p>
                     <div class="row mt-4">
                         <div class="col-md-4 mb-3">
-                            <div class="card text-center p-3 service-card">
-                                <i class="fas fa-truck service-icon mb-2"></i>
+                            <div class="card text-center p-3 hover-card">
+                                <i class="fas fa-truck fa-3x text-warning mb-2"></i>
                                 <h5>Livraison rapide</h5>
-                                <p class="small">24h - 48h max</p>
+                                <small class="blink-text">Partout à Gabassa</small>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <div class="card text-center p-3 service-card">
-                                <i class="fas fa-shield-alt service-icon mb-2"></i>
+                            <div class="card text-center p-3">
+                                <i class="fas fa-shield-alt fa-3x text-warning mb-2"></i>
                                 <h5>Paiement sécurisé</h5>
-                                <p class="small">100% sécurisé</p>
+                                <small class="blink-text">100% sécurisé</small>
                             </div>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <div class="card text-center p-3 service-card">
-                                <i class="fas fa-headset service-icon mb-2"></i>
-                                <h5>Service client 24/24</h5>
-                                <p class="small">Support permanent</p>
+                            <div class="card text-center p-3">
+                                <i class="fas fa-headset fa-3x text-warning mb-2"></i>
+                                <h5>Service client 24/7</h5>
+                                <small class="blink-text">Toujours disponible</small>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card animate__animated animate__pulse animate__infinite">
+                    <div class="card animate__animated animate__fadeInRight">
                         <div class="card-body">
                             <h5 class="card-title">Nos services</h5>
                             <ul class="list-unstyled">
                                 <li><i class="fas fa-check-circle text-success me-2"></i>Vente de produits divers</li>
                                 <li><i class="fas fa-check-circle text-success me-2"></i>Suivi de commande</li>
                                 <li><i class="fas fa-check-circle text-success me-2"></i>Livraison à domicile</li>
-                                <li><i class="fas fa-check-circle text-success me-2"></i>Paiement à la livraison</li>
+                                <li><i class="fas fa-check-circle text-success me-2"></i></li>
                             </ul>
                         </div>
                     </div>
@@ -546,23 +375,21 @@
         </div>
 
         <div id="productsSection" class="section" style="display: none;">
-            <h2 class="mb-4 animated-text">Nos Produits</h2>
+            <h2 class="mb-4">Nos Produits <span class="badge bg-warning" id="productCount"></span></h2>
             <div class="row" id="productsList"></div>
         </div>
 
         <div id="trackSection" class="section" style="display: none;">
-            <h2 class="mb-4 animated-text">Suivre ma commande</h2>
+            <h2 class="mb-4">Suivre ma commande</h2>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card animate__animated animate__fadeInLeft">
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Rechercher par numéro de téléphone</h5>
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                <input type="tel" class="form-control" id="trackPhone" placeholder="Votre numéro">
-                                <button class="btn btn-primary btn-animated" onclick="trackOrder()">
-                                    <i class="fas fa-search"></i> Rechercher
-                                </button>
+                                <input type="tel" class="form-control" id="trackPhone" placeholder="Ex: 98136422">
+                                <button class="btn btn-primary" onclick="trackOrder()">Rechercher</button>
                             </div>
                         </div>
                     </div>
@@ -572,27 +399,27 @@
         </div>
 
         <div id="contactSection" class="section" style="display: none;">
-            <h2 class="mb-4 animated-text">Contactez-nous</h2>
+            <h2 class="mb-4">Contactez-nous</h2>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card animate__animated animate__fadeInLeft">
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Informations de contact</h5>
-                            <p class="shake-text"><i class="fas fa-phone-alt text-warning me-2"></i> <strong>Téléphone:</strong> +227 98136422</p>
-                            <p class="shake-text"><i class="fas fa-envelope text-warning me-2"></i> <strong>Email:</strong> contact@habsatdigital.com</p>
-                            <p class="shake-text"><i class="fas fa-map-marker-alt text-warning me-2"></i> <strong>Adresse:</strong> Gabassa, Niger</p>
-                            <p class="shake-text"><i class="fab fa-whatsapp text-warning me-2"></i> <strong>WhatsApp:</strong> +227 98136422</p>
-                            <p class="shake-text"><i class="far fa-clock text-warning me-2"></i> <strong>Horaires:</strong> 8h - 22h, 7j/7</p>
+                            <p><i class="fas fa-phone-alt text-warning me-2"></i> <strong>Téléphone:</strong> +227 98136422</p>
+                            <p><i class="fas fa-envelope text-warning me-2"></i> <strong>Email:</strong> contact@habsatdigital.com</p>
+                            <p><i class="fas fa-map-marker-alt text-warning me-2"></i> <strong>Adresse:</strong> Gabassa, Niger</p>
+                            <p><i class="fab fa-whatsapp text-warning me-2"></i> <strong>WhatsApp:</strong> +227 98136422</p>
+                            <p><i class="far fa-clock text-warning me-2"></i> <strong>Horaires:</strong> 8h - 22h, 7j/7</p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="card animate__animated animate__fadeInRight">
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Administrateur</h5>
                             <p><i class="fas fa-user-tie text-warning me-2"></i> <strong>Contact direct:</strong> +227 98136422</p>
                             <p><i class="fas fa-envelope text-warning me-2"></i> admin@habsatdigital.com</p>
-                            <button class="btn btn-whatsapp whatsapp-btn w-100 btn-animated btn-pulse" onclick="window.open('https://wa.me/22798136422', '_blank')">
+                            <button class="btn btn-whatsapp whatsapp-btn w-100" onclick="window.open('https://wa.me/22798136422', '_blank')">
                                 <i class="fab fa-whatsapp me-2"></i>Contacter l'administrateur
                             </button>
                         </div>
@@ -602,34 +429,34 @@
         </div>
 
         <div id="cartSection" class="section" style="display: none;">
-            <h2 class="mb-4 animated-text">Mon Panier</h2>
+            <h2 class="mb-4">Mon Panier</h2>
             <div class="row">
                 <div class="col-md-8">
-                    <div class="card animate__animated animate__fadeInUp">
+                    <div class="card">
                         <div class="card-body">
                             <div id="cartItems"></div>
                             <hr>
-                            <h5>Total: <span id="cartTotal" class="price-blink">0</span> FCFA</h5>
+                            <h5>Total: <span id="cartTotal">0</span> FCFA</h5>
                             <div class="mt-3">
                                 <label for="customerPhone" class="form-label">Votre numéro de téléphone *</label>
-                                <input type="tel" class="form-control" id="customerPhone" required>
+                                <input type="tel" class="form-control" id="customerPhone" required placeholder="Ex: 98136422">
                             </div>
                             <div class="mt-3">
                                 <label for="customerName" class="form-label">Votre nom complet *</label>
-                                <input type="text" class="form-control" id="customerName" required>
+                                <input type="text" class="form-control" id="customerName" required placeholder="Nom et prénom">
                             </div>
                             <div class="mt-3">
                                 <label for="deliveryAddress" class="form-label">Adresse de livraison *</label>
-                                <textarea class="form-control" id="deliveryAddress" rows="2" required></textarea>
+                                <textarea class="form-control" id="deliveryAddress" rows="2" required placeholder="Votre adresse complète"></textarea>
                             </div>
-                            <button class="btn btn-success mt-3 w-100 btn-animated btn-pulse" onclick="checkout()">
+                            <button class="btn btn-success mt-3 w-100" onclick="checkout()">
                                 <i class="fab fa-whatsapp me-2"></i>Finaliser la commande via WhatsApp
                             </button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card animate__animated animate__fadeInUp">
+                    <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">Instructions</h5>
                             <p>Après finalisation, vous serez redirigé vers WhatsApp avec un récapitulatif de votre commande.</p>
@@ -642,13 +469,13 @@
 
         <div id="adminSection" class="section" style="display: none;">
             <div class="admin-section">
-                <h3 class="mb-4 animated-text">Interface d'Administration</h3>
+                <h3 class="mb-4">Interface d'Administration</h3>
                 
                 <!-- Admin Login -->
                 <div id="adminLogin">
                     <div class="row justify-content-center">
                         <div class="col-md-6">
-                            <div class="card animate__animated animate__zoomIn">
+                            <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Connexion Administrateur</h5>
                                     <div class="mb-3">
@@ -659,7 +486,7 @@
                                         <label for="adminPassword" class="form-label">Mot de passe</label>
                                         <input type="password" class="form-control" id="adminPassword" placeholder="Entrez le mot de passe">
                                     </div>
-                                    <button class="btn btn-primary btn-animated" onclick="adminLogin()">Se connecter</button>
+                                    <button class="btn btn-primary" onclick="adminLogin()">Se connecter</button>
                                 </div>
                             </div>
                         </div>
@@ -683,7 +510,7 @@
                     <div class="tab-content">
                         <!-- Manage Products Tab -->
                         <div class="tab-pane fade show active" id="manageProducts">
-                            <button class="btn btn-success mb-3 btn-animated" onclick="showAddProductModal()">
+                            <button class="btn btn-success mb-3" onclick="showAddProductModal()">
                                 <i class="fas fa-plus"></i> Ajouter un produit
                             </button>
                             <div class="table-responsive">
@@ -736,7 +563,7 @@
                                                 <label for="deliveryPerson" class="form-label">Nom du livreur</label>
                                                 <input type="text" class="form-control" id="deliveryPerson">
                                             </div>
-                                            <button class="btn btn-primary btn-animated" onclick="verifyAndDeliver()">Vérifier et livrer</button>
+                                            <button class="btn btn-primary" onclick="verifyAndDeliver()">Vérifier et livrer</button>
                                         </div>
                                     </div>
                                 </div>
@@ -781,37 +608,37 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary btn-animated" onclick="saveProduct()">Enregistrer</button>
+                    <button type="button" class="btn btn-primary" onclick="saveProduct()">Enregistrer</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer avec animations -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 animate__animated animate__fadeInUp">
-                    <h5 class="animated-text">Habsat_Digital</h5>
-                    <p>Votre partenaire de confiance pour tous vos achats à Gabassa.</p>
+                <div class="col-md-4">
+                    <h5>Habsat_Digital</h5>
+                    <p>Votre partenaire de confiance pour tous vos achats.</p>
                 </div>
-                <div class="col-md-4 animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
-                    <h5 class="animated-text">Liens rapides</h5>
+                <div class="col-md-4">
+                    <h5>Liens rapides</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white nav-link" onclick="showSection('products')">Produits</a></li>
-                        <li><a href="#" class="text-white nav-link" onclick="showSection('track')">Suivre commande</a></li>
-                        <li><a href="#" class="text-white nav-link" onclick="showSection('contact')">Contact</a></li>
+                        <li><a href="#" class="text-white" onclick="showSection('products')">Produits</a></li>
+                        <li><a href="#" class="text-white" onclick="showSection('track')">Suivre commande</a></li>
+                        <li><a href="#" class="text-white" onclick="showSection('contact')">Contact</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4 contact-info animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">
-                    <h5 class="animated-text">Contact</h5>
-                    <p class="shake-text"><i class="fas fa-phone"></i> +227 98136422</p>
-                    <p class="shake-text"><i class="fab fa-whatsapp"></i> +227 98136422</p>
-                    <p class="shake-text"><i class="fas fa-envelope"></i> contact@habsatdigital.com</p>
+                <div class="col-md-4 contact-info">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-phone"></i> +227 98136422</p>
+                    <p><i class="fab fa-whatsapp"></i> +227 98136422</p>
+                    <p><i class="fas fa-envelope"></i> contact@habsatdigital.com</p>
                 </div>
             </div>
             <hr class="bg-light">
-            <p class="text-center mb-0 animate__animated animate__pulse animate__infinite">&copy; 2026 Habsat_Digital de Abdourahamane Nouhou.</p>
+            <p class="text-center mb-0">&copy; 2024 Habsat_Digital. Tous droits réservés.</p>
         </div>
     </footer>
 
@@ -822,9 +649,9 @@
     <script>
         // Données initiales
         let products = JSON.parse(localStorage.getItem('products')) || [
-            { id: 1, name: 'Téléphone Samsung', price: 150000, description: 'Samsung Galaxy A14', image: 'https://via.placeholder.com/300x200?text=Samsung' },
-            { id: 2, name: 'Casque Bluetooth', price: 25000, description: 'Casque sans fil', image: 'https://via.placeholder.com/300x200?text=Casque' },
-            { id: 3, name: 'Montre connectée', price: 45000, description: 'Montre fitness', image: 'https://via.placeholder.com/300x200?text=Montre' }
+            { id: 1, name: 'Téléphone Samsung', price: 150000, description: 'Samsung Galaxy A14 - 128GB', image: 'https://via.placeholder.com/300x200?text=Samsung+A14' },
+            { id: 2, name: 'Casque Bluetooth', price: 25000, description: 'Casque sans fil avec microphone', image: 'https://via.placeholder.com/300x200?text=Casque+BT' },
+            { id: 3, name: 'Montre connectée', price: 45000, description: 'Montre fitness avec GPS', image: 'https://via.placeholder.com/300x200?text=Montre+Connectee' }
         ];
         
         let orders = JSON.parse(localStorage.getItem('orders')) || [];
@@ -832,48 +659,55 @@
         let currentImageFile = null;
         let editingProductId = null;
 
-        // Initialisation
+        // Initialisation - CORRIGÉ: Maintenant les produits s'affichent correctement
         document.addEventListener('DOMContentLoaded', function() {
-            updateProductsDisplay();
+            console.log('Page chargée, mise à jour des produits...');
+            loadProducts();
             updateCartCount();
-            startCounters();
+            updateProductCount();
         });
 
-        // Fonction pour afficher les notifications
-        function showNotification(message, type = 'success') {
-            const notification = document.getElementById('notification');
-            const notificationMessage = document.getElementById('notificationMessage');
-            notificationMessage.textContent = message;
-            notification.classList.add('show');
+        // Fonction pour charger les produits - CORRIGÉ
+        function loadProducts() {
+            const productsList = document.getElementById('productsList');
+            if (!productsList) return;
             
-            if (type === 'error') {
-                notification.querySelector('i').className = 'fas fa-times-circle text-danger me-2';
-            } else {
-                notification.querySelector('i').className = 'fas fa-check-circle text-success me-2';
+            productsList.innerHTML = '';
+            
+            if (products.length === 0) {
+                productsList.innerHTML = '<div class="col-12"><div class="alert alert-info">Aucun produit disponible pour le moment</div></div>';
+                return;
             }
+
+            products.sort((a, b) => b.id - a.id); // Afficher les plus récents d'abord
             
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+            products.forEach(product => {
+                const productCard = `
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card product-card h-100">
+                            <div class="position-relative">
+                                <img src="${product.image}" class="card-img-top product-image" alt="${product.name}">
+                                ${isNewProduct(product.id) ? '<span class="new-product-badge"><i class="fas fa-star"></i> NOUVEAU</span>' : ''}
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text text-muted flex-grow-1">${product.description}</p>
+                                <p class="card-text"><strong class="text-warning fs-5">${product.price.toLocaleString()} FCFA</strong></p>
+                                <button class="btn btn-primary w-100" onclick="addToCart(${product.id})">
+                                    <i class="fas fa-cart-plus"></i> Ajouter au panier
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productsList.innerHTML += productCard;
+            });
         }
 
-        // Animation des compteurs
-        function startCounters() {
-            const counters = document.querySelectorAll('.counter');
-            counters.forEach(counter => {
-                const target = parseInt(counter.innerText);
-                let count = 0;
-                const updateCounter = () => {
-                    if (count < target) {
-                        count += Math.ceil(target / 50);
-                        counter.innerText = count + '+';
-                        setTimeout(updateCounter, 50);
-                    } else {
-                        counter.innerText = target + '+';
-                    }
-                };
-                updateCounter();
-            });
+        // Vérifier si un produit est nouveau (moins de 7 jours)
+        function isNewProduct(productId) {
+            // Considérer les produits avec ID > 1000 comme nouveaux (ajoutés après initialisation)
+            return productId > 1000;
         }
 
         // Navigation
@@ -881,12 +715,10 @@
             document.querySelectorAll('.section').forEach(el => el.style.display = 'none');
             document.getElementById(section + 'Section').style.display = 'block';
             
-            // Animation d'entrée
-            const currentSection = document.getElementById(section + 'Section');
-            currentSection.classList.add('animate__animated', 'animate__fadeIn');
-            setTimeout(() => {
-                currentSection.classList.remove('animate__animated', 'animate__fadeIn');
-            }, 1000);
+            // Recharger les produits quand on va dans la section produits
+            if (section === 'products') {
+                loadProducts();
+            }
         }
 
         function showCart() {
@@ -900,29 +732,12 @@
             document.getElementById('adminDashboard').style.display = 'none';
         }
 
-        // Gestion des produits
-        function updateProductsDisplay() {
-            const productsList = document.getElementById('productsList');
-            if (!productsList) return;
-            
-            productsList.innerHTML = '';
-            products.forEach(product => {
-                productsList.innerHTML += `
-                    <div class="col-md-4 col-sm-6">
-                        <div class="card product-card animate__animated animate__zoomIn">
-                            <img src="${product.image}" class="card-img-top product-image" alt="${product.name}">
-                            <div class="card-body">
-                                <h5 class="card-title">${product.name}</h5>
-                                <p class="card-text text-muted">${product.description}</p>
-                                <p class="card-text"><strong class="price-blink">${product.price.toLocaleString()} FCFA</strong></p>
-                                <button class="btn btn-primary w-100 btn-animated" onclick="addToCart(${product.id})">
-                                    <i class="fas fa-cart-plus"></i> Ajouter au panier
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
+        // Mettre à jour le compteur de produits
+        function updateProductCount() {
+            const countElement = document.getElementById('productCount');
+            if (countElement) {
+                countElement.textContent = products.length + ' produits disponibles';
+            }
         }
 
         // Panier
@@ -932,13 +747,18 @@
                 cart.push(product);
                 localStorage.setItem('cart', JSON.stringify(cart));
                 updateCartCount();
-                showNotification('Produit ajouté au panier!');
                 
-                // Animation du bouton
-                event.target.classList.add('animate__animated', 'animate__pulse');
+                // Animation de confirmation
+                const btn = event.target;
+                btn.innerHTML = '<i class="fas fa-check"></i> Ajouté!';
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-success');
+                
                 setTimeout(() => {
-                    event.target.classList.remove('animate__animated', 'animate__pulse');
-                }, 500);
+                    btn.innerHTML = '<i class="fas fa-cart-plus"></i> Ajouter au panier';
+                    btn.classList.remove('btn-success');
+                    btn.classList.add('btn-primary');
+                }, 1000);
             }
         }
 
@@ -966,7 +786,7 @@
                             <h6 class="mb-0">${item.name}</h6>
                             <small class="text-muted">${item.price.toLocaleString()} FCFA</small>
                         </div>
-                        <button class="btn btn-sm btn-danger btn-animated" onclick="removeFromCart(${index})">
+                        <button class="btn btn-sm btn-danger" onclick="removeFromCart(${index})">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -980,7 +800,6 @@
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             displayCart();
-            showNotification('Produit retiré du panier');
         }
 
         // Commande WhatsApp
@@ -990,12 +809,12 @@
             const address = document.getElementById('deliveryAddress').value;
 
             if (!phone || !name || !address) {
-                showNotification('Veuillez remplir tous les champs', 'error');
+                alert('Veuillez remplir tous les champs');
                 return;
             }
 
             if (cart.length === 0) {
-                showNotification('Votre panier est vide', 'error');
+                alert('Votre panier est vide');
                 return;
             }
 
@@ -1008,7 +827,7 @@
                 clientName: name,
                 clientPhone: phone,
                 address: address,
-                items: cart,
+                items: [...cart],
                 total: total,
                 status: 'pending',
                 date: new Date().toISOString()
@@ -1039,10 +858,11 @@
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartCount();
             
-            showNotification('Commande envoyée avec succès!');
-            
             // Afficher le reçu
             showReceipt(order);
+            
+            // Retour à l'accueil
+            setTimeout(() => showSection('home'), 2000);
         }
 
         function showReceipt(order) {
@@ -1053,37 +873,38 @@
                     <title>Reçu de commande - Habsat_Digital</title>
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
                     <style>
-                        @keyframes blink {
-                            0% { opacity: 1; }
-                            50% { opacity: 0.5; }
-                            100% { opacity: 1; }
-                        }
-                        .blink {
-                            animation: blink 1s infinite;
-                        }
+                        body { font-family: Arial, sans-serif; padding: 20px; }
+                        .receipt { max-width: 600px; margin: 0 auto; border: 2px solid #e67e22; padding: 20px; border-radius: 10px; }
+                        .header { text-align: center; border-bottom: 2px dashed #e67e22; padding-bottom: 10px; margin-bottom: 20px; }
+                        .status-badge { background: #ffc107; padding: 5px 10px; border-radius: 5px; display: inline-block; }
+                        @media print { .no-print { display: none; } }
                     </style>
                 </head>
                 <body>
-                    <div class="container mt-5">
-                        <div class="order-receipt">
-                            <h2 class="text-center">Habsat_Digital</h2>
-                            <p class="text-center">Reçu de commande</p>
-                            <hr>
-                            <p><strong>N° Commande:</strong> ${order.id}</p>
-                            <p><strong>Date:</strong> ${new Date(order.date).toLocaleString()}</p>
-                            <p><strong>Client:</strong> ${order.clientName}</p>
-                            <p><strong>Téléphone:</strong> ${order.clientPhone}</p>
-                            <p><strong>Statut:</strong> <span class="badge bg-warning blink">NON PAYÉ</span></p>
-                            <hr>
-                            <h5>Produits:</h5>
-                            <ul>
-                                ${order.items.map(item => `<li>${item.name} - ${item.price.toLocaleString()} FCFA</li>`).join('')}
-                            </ul>
-                            <hr>
-                            <h4>Total: ${order.total.toLocaleString()} FCFA</h4>
-                            <hr>
-                            <button class="btn btn-primary" onclick="window.print()">Télécharger le reçu</button>
+                    <div class="receipt">
+                        <div class="header">
+                            <h2>Habsat_Digital</h2>
+                            <p>Reçu de commande</p>
                         </div>
+                        <p><strong>N° Commande:</strong> ${order.id}</p>
+                        <p><strong>Date:</strong> ${new Date(order.date).toLocaleString()}</p>
+                        <p><strong>Client:</strong> ${order.clientName}</p>
+                        <p><strong>Téléphone:</strong> ${order.clientPhone}</p>
+                        <p><strong>Adresse:</strong> ${order.address}</p>
+                        <p><strong>Statut:</strong> <span class="status-badge">⚫ NON PAYÉ</span></p>
+                        <hr>
+                        <h5>Produits commandés:</h5>
+                        <ul>
+                            ${order.items.map(item => `<li>${item.name} - ${item.price.toLocaleString()} FCFA</li>`).join('')}
+                        </ul>
+                        <hr>
+                        <h3 class="text-end">Total: ${order.total.toLocaleString()} FCFA</h3>
+                        <hr>
+                        <div class="text-center no-print">
+                            <button class="btn btn-primary" onclick="window.print()">📥 Télécharger le reçu</button>
+                            <button class="btn btn-success" onclick="window.close()">Fermer</button>
+                        </div>
+                        <p class="text-center mt-3"><small>Merci de votre confiance !</small></p>
                     </div>
                 </body>
                 </html>
@@ -1094,7 +915,7 @@
         function trackOrder() {
             const phone = document.getElementById('trackPhone').value;
             if (!phone) {
-                showNotification('Veuillez entrer votre numéro', 'error');
+                alert('Veuillez entrer votre numéro');
                 return;
             }
 
@@ -1102,29 +923,33 @@
             const trackResult = document.getElementById('trackResult');
             
             if (customerOrders.length === 0) {
-                trackResult.innerHTML = '<div class="alert alert-info animate__animated animate__fadeIn">Aucune commande trouvée avec ce numéro</div>';
+                trackResult.innerHTML = '<div class="alert alert-info">Aucune commande trouvée avec ce numéro</div>';
                 return;
             }
 
-            let html = '<div class="card animate__animated animate__fadeIn"><div class="card-body"><h5>Vos commandes</h5>';
-            customerOrders.forEach(order => {
-                let statusClass = 'bg-warning';
+            let html = '<div class="card"><div class="card-body"><h5>Vos commandes</h5>';
+            customerOrders.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(order => {
+                let statusClass = 'status-pending';
                 let statusText = 'En attente de paiement';
+                let statusIcon = '⏳';
                 
                 if (order.status === 'paid') {
-                    statusClass = 'bg-info';
+                    statusClass = 'status-paid';
                     statusText = 'Payé - En attente de livraison';
+                    statusIcon = '✅';
                 } else if (order.status === 'delivered') {
-                    statusClass = 'bg-success';
-                    statusText = `Livré par: ${order.deliveredBy || 'N/A'}`;
+                    statusClass = 'status-delivered';
+                    statusText = `Livré le ${new Date(order.deliveredAt).toLocaleDateString()} par ${order.deliveredBy}`;
+                    statusIcon = '📦';
                 }
 
                 html += `
                     <div class="border-bottom mb-3 pb-3">
-                        <p><strong>N° ${order.id}</strong></p>
+                        <p><strong>${statusIcon} N° ${order.id}</strong></p>
                         <p>Date: ${new Date(order.date).toLocaleDateString()}</p>
                         <p>Total: ${order.total.toLocaleString()} FCFA</p>
-                        <p>Statut: <span class="badge ${statusClass}">${statusText}</span></p>
+                        <p>Statut: <span class="status-badge ${statusClass}">${statusText}</span></p>
+                        <small>${order.items.length} produit(s)</small>
                     </div>
                 `;
             });
@@ -1135,15 +960,13 @@
         // Administration
         function adminLogin() {
             const password = document.getElementById('adminPassword').value;
-            // Mot de passe: admin123
-            if (password === 'HDMine@.com') {
+            if (password === 'HDMine@1122.com') {
                 document.getElementById('adminLogin').style.display = 'none';
                 document.getElementById('adminDashboard').style.display = 'block';
                 updateAdminProducts();
                 updateAdminOrders();
-                showNotification('Connexion réussie');
             } else {
-                showNotification('Mot de passe incorrect', 'error');
+                alert('Mot de passe incorrect');
             }
         }
 
@@ -1152,18 +975,18 @@
             if (!adminProductsList) return;
 
             adminProductsList.innerHTML = '';
-            products.forEach(product => {
+            products.sort((a, b) => b.id - a.id).forEach(product => {
                 adminProductsList.innerHTML += `
                     <tr>
-                        <td><img src="${product.image}" style="width: 50px; height: 50px; object-fit: cover;"></td>
+                        <td><img src="${product.image}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 5px;"></td>
                         <td>${product.name}</td>
                         <td>${product.price.toLocaleString()} FCFA</td>
                         <td>${product.description}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning btn-animated" onclick="editProduct(${product.id})">
+                            <button class="btn btn-sm btn-warning" onclick="editProduct(${product.id})">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger btn-animated" onclick="deleteProduct(${product.id})">
+                            <button class="btn btn-sm btn-danger" onclick="deleteProduct(${product.id})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>
@@ -1221,7 +1044,7 @@
             const imagePreview = document.getElementById('imagePreview');
             
             if (!name || !price || !description) {
-                showNotification('Veuillez remplir tous les champs', 'error');
+                alert('Veuillez remplir tous les champs');
                 return;
             }
 
@@ -1242,34 +1065,40 @@
                         image: image
                     };
                 }
-                showNotification('Produit modifié avec succès');
             } else {
-                // Ajouter
+                // Ajouter avec un ID basé sur le timestamp
                 const newProduct = {
-                    id: Date.now(),
+                    id: Date.now(), // Utiliser timestamp pour garantir l'unicité
                     name: name,
                     price: price,
                     description: description,
                     image: image
                 };
                 products.push(newProduct);
-                showNotification('Produit ajouté avec succès');
             }
 
+            // Sauvegarder et mettre à jour l'affichage
             localStorage.setItem('products', JSON.stringify(products));
-            updateProductsDisplay();
-            updateAdminProducts();
             
+            // CORRECTION: Forcer le rechargement des produits
+            loadProducts();
+            updateAdminProducts();
+            updateProductCount();
+            
+            // Fermer le modal
             bootstrap.Modal.getInstance(document.getElementById('productModal')).hide();
+            
+            // Message de confirmation
+            alert('Produit enregistré avec succès!');
         }
 
         function deleteProduct(id) {
             if (confirm('Voulez-vous vraiment supprimer ce produit?')) {
                 products = products.filter(p => p.id !== id);
                 localStorage.setItem('products', JSON.stringify(products));
-                updateProductsDisplay();
+                loadProducts();
                 updateAdminProducts();
-                showNotification('Produit supprimé');
+                updateProductCount();
             }
         }
 
@@ -1278,22 +1107,22 @@
             if (!adminOrdersList) return;
 
             adminOrdersList.innerHTML = '';
-            orders.forEach(order => {
-                let statusClass = 'bg-warning';
-                let statusText = 'En attente de paiement';
+            orders.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(order => {
+                let statusClass = 'status-pending';
+                let statusText = 'Non payé';
                 let actions = '';
 
                 if (order.status === 'pending') {
-                    statusText = 'Non payé';
-                    actions = `<button class="btn btn-sm btn-success btn-animated" onclick="markAsPaid('${order.id}')">Marquer payé</button>`;
+                    statusText = 'En attente de paiement';
+                    actions = `<button class="btn btn-sm btn-success" onclick="markAsPaid('${order.id}')">✓ Marquer payé</button>`;
                 } else if (order.status === 'paid') {
-                    statusClass = 'bg-info';
-                    statusText = 'Payé - Non livré';
-                    actions = `<span class="text-success">En attente de livraison</span>`;
+                    statusClass = 'status-paid';
+                    statusText = 'Payé - À livrer';
+                    actions = `<span class="text-success">✅ En attente de livraison</span>`;
                 } else if (order.status === 'delivered') {
-                    statusClass = 'bg-success';
+                    statusClass = 'status-delivered';
                     statusText = 'Livré';
-                    actions = `<span class="text-info">Livré par: ${order.deliveredBy || 'N/A'}</span>`;
+                    actions = `<span class="text-info">📦 Livré par: ${order.deliveredBy || 'N/A'}</span>`;
                 }
 
                 adminOrdersList.innerHTML += `
@@ -1302,7 +1131,7 @@
                         <td>${order.clientName}</td>
                         <td>${order.clientPhone}</td>
                         <td>${order.total.toLocaleString()} FCFA</td>
-                        <td><span class="badge ${statusClass}">${statusText}</span></td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
                         <td>${actions}</td>
                     </tr>
                 `;
@@ -1315,7 +1144,6 @@
                 order.status = 'paid';
                 localStorage.setItem('orders', JSON.stringify(orders));
                 updateAdminOrders();
-                showNotification('Commande marquée comme payée');
             }
         }
 
@@ -1324,7 +1152,7 @@
             const deliverer = document.getElementById('deliveryPerson').value;
 
             if (!phone || !deliverer) {
-                showNotification('Veuillez remplir tous les champs', 'error');
+                alert('Veuillez remplir tous les champs');
                 return;
             }
 
@@ -1344,8 +1172,8 @@
                         <p>Client: ${order.clientName}</p>
                         <p>Total: ${order.total.toLocaleString()} FCFA</p>
                         <p>Adresse: ${order.address}</p>
-                        <button class="btn btn-success btn-animated" onclick="confirmDelivery('${order.id}', '${deliverer}')">
-                            Confirmer la livraison
+                        <button class="btn btn-success" onclick="confirmDelivery('${order.id}', '${deliverer}')">
+                            <i class="fas fa-check"></i> Confirmer la livraison
                         </button>
                     </div>
                 `;
@@ -1362,7 +1190,7 @@
                 order.deliveredAt = new Date().toISOString();
                 localStorage.setItem('orders', JSON.stringify(orders));
                 
-                showNotification('Livraison confirmée!');
+                alert('✅ Livraison confirmée!');
                 document.getElementById('deliveryPhone').value = '';
                 document.getElementById('deliveryPerson').value = '';
                 document.getElementById('deliveryResult').innerHTML = '';
